@@ -29,7 +29,7 @@ void Tracer::run() {
 	err_sum += err; //しきい値の差の合計＋しきい値の差
 	int8_t iControl = err_sum * Ki; //積分制御の値
 
-	static int8_t prev_err = 0; //1つ前の目標値←これ毎度毎度ひとつ前の目標値0になってない？
+	static int8_t prev_err = 0; //1つ前の目標値
 	int8_t dControl = (err - prev_err) * Kd; //微分制御の値
 	prev_err = err; //1つ前の目標値の差を更新
 
