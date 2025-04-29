@@ -25,15 +25,15 @@ private:
 	Motor leftWheel;
 	Motor rightWheel;
 	const int8_t target = (WHITE_BRIGHTNESS + BLACK_BRIGHTNESS) / 2; //目標値
-	const float Kp = 0.57; // Pゲイン
-	const float Ki = 0.09; //Iゲイン
-	const float Kd = 0.69; //Dゲイン
+	const float Kp = 0.4; // Pゲイン
+	const float Ki = 0.01; //Iゲイン
+	const float Kd = 0.73; //Dゲイン
 
 	
 
 #ifndef MAKE_RASPIKE
-	const int8_t BASE_SPEED = 40; // モーターの初期パワー
+	const int8_t BASE_SPEED = 35; // モーターの初期パワー
 #else
-	const int8_t BASE_SPEED = 40;
+	const int8_t BASE_SPEED = 35;
 #endif
 };
