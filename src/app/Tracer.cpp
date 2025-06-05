@@ -27,7 +27,8 @@ void Tracer::run() {
 	int8_t dControl = (err - prev_err) * Kd; //微分制御の値
 	prev_err = err; //1つ前の目標値の差を更新
 
-	int8_t controlTotal = (RIGHT_EDGE) * (pControl + iControl + dControl); //制御値の合計
+	int8_t controlTotal = (RIGHT_EDGE) * (pControl + iControl + dControl); //制御値の合計 RIGHT
+//	int8_t controlTotal = (LEFT_EDGE) * (pControl + iControl + dControl); //制御値の合計 LEFT
 
 	msg_f("running...", 1);
 	right_motor_power = BASE_SPEED + controlTotal; //パワー＋制御値の合計

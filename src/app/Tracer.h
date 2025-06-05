@@ -32,8 +32,10 @@ private:
 	
 
 #ifndef MAKE_RASPIKE
-	const int8_t BASE_SPEED = 35; // モーターの初期パワー
+	const int8_t BASE_SPEED = 35; // モーターの初期パワー RIGHT
+	const int8_t BASE_SPEED = 40; // モーターの初期パワー LEFT
 #else
-	const int8_t BASE_SPEED = 35;
+	const int8_t BASE_SPEED = 35; // RIGHT
+	const int8_t BASE_SPEED = 40; // LEFT
 #endif
 };
