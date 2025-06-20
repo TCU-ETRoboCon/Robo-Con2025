@@ -2,16 +2,24 @@
 #include "Tracer.h"
 #include "Clock.h"
 
+#include "color_detection_line_trace/RGBEval.h"
+// #include "color_detection_line_trace/ReflectiveBrightnessEval.h"
+
 #include <stdio.h>
 
 using namespace ev3api;
 
-Tracer tracer;
+static Tracer* tracer; = nullptr;
 Clock clock;
 FILE *fp;
 
 void tracer_task(intptr_t exinf) {
-
+    // tracerがnullptrでないことを保証
+    if (tracer != nullptr) {
+        fprintf(fp, "reflection:%d,right_motor:%d,left_motor:%d\n",
+                tracer->colorSensor.getBrightness(),
+                tracer->right_motor_power,
+                tracer->left_motor_power);
     fprintf(fp,"reflection:%d,right_motor:%d,left_motor:%d\n", tracer.colorSensor.getBrightness(), tracer.right_motor_power, tracer.left_motor_power);//書き込み
 
     tracer.run();
