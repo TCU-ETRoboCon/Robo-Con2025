@@ -15,7 +15,7 @@ public:
             0.2133 * rgb.r + 0.0171 * rgb.g + 0.3639 * rgb.b + 3.9663
         );
 
-        return target - brightness;
+        return target - brightness; //誤差(目標値-反射光)
     }
 
 private:

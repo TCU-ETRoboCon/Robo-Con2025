@@ -1,9 +1,12 @@
 #include "Tracer.h"
 #include <cmath>
 
-Tracer::Tracer() :
-	leftWheel(PORT_C), rightWheel(PORT_B), colorSensor(PORT_2), sonarSensor(PORT_3) {
-}
+Tracer::Tracer(ColorEvaluationStrategy* evaluator) :
+	colorEvaluator(evaluator),
+	leftWheel(PORT_C),
+	rightWheel(PORT_B),
+	colorSensor(PORT_2),
+	sonarSensor(PORT_3) {}
 
 void Tracer::init() {
 	init_f("Tracer");
@@ -16,16 +19,16 @@ void Tracer::terminate() {
 }
 
 void Tracer::run() {
-	rgb_raw_t rgb; //rgb値の格納場所
-	colorSensor.getRawColor(rgb); //rgb値取得
+	// rgb_raw_t rgb; //rgb値の格納場所
+	// colorSensor.getRawColor(rgb); //rgb値取得
 
-	int8_t pBrightness = round(0.2133 * rgb.r + 0.0171 * rgb.g + 0.3639 * rgb.b + 3.9663);
+	// int8_t pBrightness = round(0.2133 * rgb.r + 0.0171 * rgb.g + 0.3639 * rgb.b + 3.9663);
 
-	int8_t err = target - pBrightness; //誤差(目標値-反射光)
+	int8_t err = colorEvaluator->calculateError();
 
 	int8_t pControl = err * Kp; //比例制御の値
 
-	int8_t err_sum = 0; //目標値の差の合計
+	 static int8_t err_sum = 0; //目標値の差の合計
 	err_sum += err; //しきい値の差の合計＋しきい値の差
 	int8_t iControl = err_sum * Ki; //積分制御の値
 
